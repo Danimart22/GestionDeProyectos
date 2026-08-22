@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 //Esta anotación son en realidad tres en una:
 //Configuration que marca esta clase como fuente de definiciones beans
-//EnableAutoConfiguration esta le dice a springboot que configure automaticamente todo lo que pueda
+//EnableAutoConfiguration esta le dice a springboot que configure automaticamente odo lo que pueda
 //basado en las dependencias que ves en el classpath
 //ComponentScan que le dice a spring que escanee este paquete y todos sus subpaquetes buscando clases anotadas
 //para registrarlas automaticamente
