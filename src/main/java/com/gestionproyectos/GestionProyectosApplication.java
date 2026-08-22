@@ -11,7 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 //para registrarlas automaticamente
 public class GestionProyectosApplication {
     public static void main (String [] args){
-        //Esto arranca todo lo del contexto spring, lee la configuración, inyecta dependencias y levanta el servidor
+        //Esto arrancatodo lo del contexto spring, lee la configuración, inyecta dependencias y levanta el servidor
         //embebido y deja la aplicación escuchando peticiones
         SpringApplication.run(GestionProyectosApplication.class, args);
     }
