@@ -38,4 +38,24 @@ public class Tablero {
         this.proyecto = proyecto;
         this.fechaCreación = fechaCreación;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public Proyecto getProyecto() {
+        return proyecto;
+    }
+
+    public LocalDateTime getFechaCreación() {
+        return fechaCreación;
+    }
+
+    public void renombrar(String nuevoNombre){
+        this.nombre = nuevoNombre;
+    }
 }
