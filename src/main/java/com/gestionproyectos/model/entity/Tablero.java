@@ -26,17 +26,17 @@ public class Tablero {
     private Proyecto proyecto;
 
     @Column(nullable = false)
-    private LocalDateTime fechaCreación;
+    private LocalDateTime fechaCreacion;
 
     protected Tablero(){
 
     }
 
-    public Tablero(Long id, String nombre, Proyecto proyecto, LocalDateTime fechaCreación) {
+    public Tablero(Long id, String nombre, Proyecto proyecto, LocalDateTime fechaCreacion) {
         this.id = id;
         this.nombre = nombre;
         this.proyecto = proyecto;
-        this.fechaCreación = fechaCreación;
+        this.fechaCreacion = fechaCreacion;
     }
 
     public Long getId() {
@@ -51,8 +51,8 @@ public class Tablero {
         return proyecto;
     }
 
-    public LocalDateTime getFechaCreación() {
-        return fechaCreación;
+    public LocalDateTime getFechaCreacion() {
+        return fechaCreacion;
     }
 
     public void renombrar(String nuevoNombre){
