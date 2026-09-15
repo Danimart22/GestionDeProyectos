@@ -39,6 +39,18 @@ public class SecurityConfig {
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception{
         return config.getAuthenticationManager();
     }
+    @Bean
+    // Este Bean conecta dos piezas: "cómo buscar un usuario" (userDetailsService)
+    // y "cómo verificar su contraseña" (passwordEncoder) - es el componente que realmente
+    // ejecuta la lógica de "¿estas credenciales son correctas?" cuando alguien hace login
+    public AuthenticationProvider authenticationProvider() {
+        // DaoAuthenticationProvider es la implementación estándar de Spring Security
+        // que usa un UserDetailsService + un PasswordEncoder para autenticar
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        provider.setUserDetailsService(userDetailsService);
+        provider.setPasswordEncoder(passwordEncoder());
+        return provider;
+    }
 
     @Bean
 
