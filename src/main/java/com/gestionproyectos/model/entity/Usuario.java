@@ -34,10 +34,10 @@ public class Usuario {
     @Column(nullable = false)
     private boolean activo = true;
 
-    public Usuario() {
+    protected Usuario() {
     }
 
-    public Usuario( String email, String passwordHash, String nombre, LocalDateTime fechaCreacion, boolean activo) {
+    public Usuario( String email, String passwordHash, String nombre) {
         this.email = email;
         this.passwordHash = passwordHash;
         this.nombre = nombre;

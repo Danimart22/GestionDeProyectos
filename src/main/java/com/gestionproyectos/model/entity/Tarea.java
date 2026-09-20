@@ -47,7 +47,7 @@ public class Tarea {
 
     private LocalDateTime fechaLimite;
 
-    public Tarea() {
+    protected Tarea() {
     }
 
     public Tarea(String titulo, String descripcion, EstadoTarea estado, Usuario asignado, LocalDateTime fechaCreacion, LocalDateTime fechaLimite) {
