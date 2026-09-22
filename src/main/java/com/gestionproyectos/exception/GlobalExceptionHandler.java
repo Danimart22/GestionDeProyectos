@@ -72,4 +72,15 @@ public class GlobalExceptionHandler {
         // en un sistema de logging sin exponer esos detalles internos al cliente que hizo la petición
     return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(body);
     }
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<Map<String, Object>> manejarRecursoNoEncontrado(IllegalArgumentException ex){
+        Map<String, Object> body = new HashMap<>();
+        body.put("timestamp", LocalDateTime.now());
+        body.put("status", HttpStatus.NOT_FOUND.value()); //404
+        body.put("error", "Recurso no encontrado");
+        // Reutilizamos el mensaje que ya construimos en el servicio
+        // (ej: "Proyecto no encontrado con id: 5"), en vez de duplicar el texto aquí
+        body.put("message", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(body);
+    }
 }

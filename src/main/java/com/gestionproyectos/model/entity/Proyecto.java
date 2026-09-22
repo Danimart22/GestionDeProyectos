@@ -31,7 +31,7 @@ public class Proyecto {
 
     }
 
-    public Proyecto(String nombre, String descripcion, Usuario creador, LocalDateTime fechaCreacion, boolean archivado) {
+    public Proyecto(String nombre, String descripcion, Usuario creador) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.creador = creador;
