@@ -50,11 +50,10 @@ public class Tarea {
     protected Tarea() {
     }
 
-    public Tarea(String titulo, String descripcion, EstadoTarea estado, Usuario asignado, LocalDateTime fechaCreacion, LocalDateTime fechaLimite) {
+    public Tarea(String titulo, String descripcion, Tablero tablero) {
         this.titulo = titulo;
         this.descripcion = descripcion;
-        this.estado = estado;
-        this.fechaCreacion = fechaCreacion;
+        this.tablero = tablero;
     }
 
     public LocalDateTime getFechaCreacion() {

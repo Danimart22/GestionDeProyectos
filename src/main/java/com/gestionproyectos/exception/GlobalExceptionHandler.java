@@ -5,6 +5,7 @@ package com.gestionproyectos.exception;
 import org.springframework.cglib.core.Local;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.FieldError;
@@ -82,5 +83,16 @@ public class GlobalExceptionHandler {
         // (ej: "Proyecto no encontrado con id: 5"), en vez de duplicar el texto aquí
         body.put("message", ex.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(body);
+    }
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<Map<String, Object>> manejarJsonInvalido(HttpMessageNotReadableException ex){
+        Map<String, Object> body = new HashMap<>();
+        body.put("timestamp", LocalDateTime.now());
+        body.put("status", HttpStatus.BAD_REQUEST.value());
+        body.put("error", "Solicitud invalida");
+        body.put("message", "El cuerpo de la petición es invalido o contiene valores no permitidos");
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
     }
 }

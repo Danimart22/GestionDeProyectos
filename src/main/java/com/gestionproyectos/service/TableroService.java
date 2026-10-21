@@ -22,6 +22,14 @@ public class TableroService {
         this.tableroRepository = tableroRepository;
         this.proyectoRepository = proyectoRepository;
     }
+    private TableroResponse mapearAResponse(Tablero tablero) {
+        return new TableroResponse(
+                tablero.getId(),
+                tablero.getNombre(),
+                tablero.getProyecto().getId(),
+                tablero.getFechaCreacion()
+        );
+    }
 
     @Transactional
     public TableroResponse crear(Long proyectoId, TableroRequest request){
@@ -32,10 +40,10 @@ public class TableroService {
         Tablero tablero = new Tablero(request.nombre(), proyecto);
         Tablero guardado = tableroRepository.save(tablero);
 
-        return mapearAresponse(guardado);
+        return mapearAResponse(guardado);
     }
     @Transactional(readOnly = true)
-    public List<TableroResponse> listarProyecto(Long proyectoId){
+    public List<TableroResponse> listarPorProyecto(Long proyectoId){
         // Verificamos que el proyecto exista primero - así, si alguien pide los tableros
         // de un proyecto inexistente, recibe un 404 claro en vez de una lista vacía
         // (una lista vacía sugeriría "el proyecto existe pero no tiene tableros",
