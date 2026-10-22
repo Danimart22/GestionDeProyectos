@@ -54,6 +54,8 @@ public class Tarea {
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.tablero = tablero;
+        this.estado = EstadoTarea.PENDIENTE;
+        this.fechaCreacion = LocalDateTime.now();
     }
 
     public LocalDateTime getFechaCreacion() {

@@ -15,12 +15,15 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 // @RestControllerAdvice = @ControllerAdvice + @ResponseBody, para que las respuestas
 // de error también se conviertan automáticamente a JSON, igual que los controladores normales
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+    private static final Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
     // Este método captura específicamente BadCredentialsException y UsernameNotFoundException,
     // que son las excepciones que Spring Security lanza cuando el login falla
     // (contraseña incorrecta o usuario que no existe)
@@ -64,6 +67,7 @@ public class GlobalExceptionHandler {
     // sin importar qué error inesperado ocurra en el servidor
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Map<String, Object>> manejarErroresGenerico(Exception ex){
+        log.error("Error no controlado en la peticion", ex);
         Map<String, Object> body = new HashMap<>();
         body.put("timestamp", LocalDateTime.now());
         body.put("status", HttpStatus.INTERNAL_SERVER_ERROR.value());// 500
@@ -94,5 +98,15 @@ public class GlobalExceptionHandler {
         body.put("message", "El cuerpo de la petición es invalido o contiene valores no permitidos");
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
+    }
+    @ExceptionHandler(AccesoDenegadoException.class)
+    public ResponseEntity<Map<String, Object>> manejarAccesoDenegado(AccesoDenegadoException ex){
+        Map<String, Object> body =  new HashMap<>();
+        body.put("timestamp", LocalDateTime.now());
+        body.put("status", HttpStatus.FORBIDDEN.value());
+        body.put("error", "Acceso denegado");
+        body.put("message", ex.getMessage());
+
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(body);
     }
 }
